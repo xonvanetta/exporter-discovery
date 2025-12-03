@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Chart.Name }}-config
+  namespace: {{ .Release.Namespace }}
+data:
+  config.yaml: |
+    networks:
+    {{- range .Values.config.networks }}
+      - {{ . | quote }}
+    {{- end }}
+    interval: {{ .Values.config.interval | quote }}
+    namespace: {{ .Release.Namespace | quote }}
+    workers: {{ .Values.config.workers }}
+    {{- if .Values.config.modules }}
+    modules:
+    {{- range .Values.config.modules }}
+      - name: {{ .name | quote }}
+        {{- if .scrapeInterval }}
+        scrapeInterval: {{ .scrapeInterval | quote }}
+        {{- end }}
+        {{- if .scrapeTimeout }}
+        scrapeTimeout: {{ .scrapeTimeout | quote }}
+        {{- end }}
+    {{- end }}
+    {{- end }}

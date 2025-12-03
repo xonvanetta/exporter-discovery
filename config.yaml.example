@@ -1,0 +1,15 @@
+networks:
+  - "10.33.10.0/24"
+  - "10.33.51.0/24"
+  - "192.168.1.0/24"
+
+interval: "60m"
+
+namespace: "monitoring"
+
+workers: 128
+
+modules:
+  - name: "ipmi"
+    interval: "1m"
+    timeout: "30s"

@@ -1,0 +1,11 @@
+{{- if .Values.rbac.create }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: {{ .Chart.Name }}
+  namespace: {{ .Release.Namespace }}
+rules:
+- apiGroups: ["monitoring.coreos.com"]
+  resources: ["scrapeconfigs"]
+  verbs: ["get", "list", "create", "update", "patch", "delete"]
+{{- end }}

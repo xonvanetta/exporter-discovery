@@ -1,0 +1,9 @@
+apiVersion: v2
+name: exporter-discovery
+description: Network scanner for Prometheus exporters with Kubernetes ScrapeConfig integration
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
+maintainers:
+  - name: Fabian Heib
+    url: https://github.com/xonvanetta
