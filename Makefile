@@ -22,6 +22,9 @@ dry:
 deploy:
 	helm template helm/ -n monitoring --set image.tag=${TAG} | kubectl apply -f -
 
+destroy:
+	helm template helm/ -n monitoring --set image.tag=${TAG} | kubectl delete -f -
+
 helm-package:
 	@if [ -z "$(TAG)" ]; then echo "TAG is required. Usage: make helm-push TAG=v1.0.0"; exit 1; fi
 	sed -i "s/^version:.*/version: $(TAG:v%=%)/" helm/Chart.yaml
