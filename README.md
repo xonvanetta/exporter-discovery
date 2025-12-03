@@ -53,7 +53,7 @@ Configuration fields:
 ### From GitHub OCI Registry
 
 ```bash
-helm install exporter-discovery oci://ghcr.io/xonvanetta/exporter-discovery \
+helm install exporter-discovery oci://ghcr.io/xonvanetta/charts/exporter-discovery \
   --version 1.0.0 \
   -n monitoring
 ```
@@ -61,7 +61,7 @@ helm install exporter-discovery oci://ghcr.io/xonvanetta/exporter-discovery \
 Custom values:
 
 ```bash
-helm install exporter-discovery oci://ghcr.io/xonvanetta/exporter-discovery \
+helm install exporter-discovery oci://ghcr.io/xonvanetta/charts/exporter-discovery \
   --version 1.0.0 \
   -n monitoring \
   --set config.networks[0]="10.0.0.0/24"
@@ -70,7 +70,7 @@ helm install exporter-discovery oci://ghcr.io/xonvanetta/exporter-discovery \
 Or with custom values file:
 
 ```bash
-helm install exporter-discovery oci://ghcr.io/xonvanetta/exporter-discovery \
+helm install exporter-discovery oci://ghcr.io/xonvanetta/charts/exporter-discovery \
   --version 1.0.0 \
   -n monitoring \
   -f values-prod.yaml
@@ -87,7 +87,7 @@ Custom values:
 ```bash
 helm install exporter-discovery ./helm -n monitoring \
   --set config.networks[0]="10.0.0.0/24" \
-  --set image.tag=v1.0.0
+  --set image.tag=1.0.0
 ```
 
 Or with custom values file:
@@ -103,19 +103,19 @@ helm install exporter-discovery ./helm -n monitoring -f values-prod.yaml
 Build and push Docker image:
 
 ```bash
-TAG=v1.0.0 make push
+TAG=1.0.0 make push
 ```
 
 Package and push Helm chart:
 
 ```bash
-TAG=v1.0.0 make helm-push
+TAG=1.0.0 make helm-push
 ```
 
 Deploy with Helm:
 
 ```bash
-TAG=v1.0.0 make deploy
+TAG=1.0.0 make deploy
 ```
 
 Dry run:
@@ -143,12 +143,12 @@ Run locally:
 The project includes GitHub Actions workflows for CI/CD:
 
 - **Build**: Runs on push/PR to main/master
-- **Release**: Triggered by version tags (v*)
+- **Release**: Triggered by version tags
 
 To create a release:
 
 ```bash
-git tag -a v1.0.0 -m "Release v1.0.0"
+git tag -a 1.0.0 -m "Release 1.0.0"
 git push --follow-tags
 ```
 

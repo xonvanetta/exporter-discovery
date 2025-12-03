@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     tags:
-      - 'v*'
+      - '*'
 
 env:
   REGISTRY: ghcr.io
@@ -39,7 +39,7 @@ jobs:
 
       - name: Extract version from tag
         id: version
-        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
@@ -64,7 +64,7 @@ jobs:
       - name: Package and push Helm chart
         run: |
           helm package helm/
-          helm push exporter-discovery-${{ steps.version.outputs.VERSION }}.tgz oci://${{ env.REGISTRY }}/${{ github.repository_owner }}
+          helm push exporter-discovery-${{ steps.version.outputs.VERSION }}.tgz oci://${{ env.REGISTRY }}/${{ github.repository_owner }}/charts
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
