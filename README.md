@@ -219,6 +219,9 @@ spec:
 ## TODO
 
 - **Change ScrapeConfig structure from per-module to per-host**: Currently the application creates one ScrapeConfig resource per module (e.g., `exporter-discovery-ipmi`, `exporter-discovery-node`), with all hosts exposing that module grouped together. This should be refactored to create one ScrapeConfig per discovered host (e.g., `exporter-discovery-server01.example.com`), containing all modules available on that host. This would provide better isolation, easier debugging per-host, and more granular control over individual host configurations.
+- **Add config hash annotation to Helm chart**: Implement checksum/hash annotation on pod template to trigger automatic pod redeployment when ConfigMap changes.
+- **Refactor shutdown handler to use existing library**: Replace the manual signal handling code in main.go (many rows) with an existing library like `oklog/run` to simplify shutdown orchestration and reduce code complexity.
+- **Replace custom Module type with ScrapeConfigSpec**: Instead of maintaining a custom `Module` struct with limited fields (name, interval, timeout), use the prometheus-operator's `ScrapeConfigSpec` type directly in configuration. This would allow YAML decoding of the full ScrapeConfig API without needing to manually add new fields each time a feature is needed, providing better alignment with the Kubernetes API and more flexibility.
 
 ## License
 

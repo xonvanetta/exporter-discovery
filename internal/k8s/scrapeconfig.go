@@ -76,7 +76,6 @@ func NewClient(namespace string, moduleConfigs []Module) (*Client, error) {
 }
 
 func (c *Client) getModuleConfig(name string) *Module {
-	fmt.Println(c.Modules, name)
 	for _, m := range c.Modules {
 		if m.Name == name {
 			return &m
@@ -119,11 +118,9 @@ func (c *Client) applyModuleConfig(sc *monitoringv1alpha1.ScrapeConfig, moduleNa
 
 	if module := c.getModuleConfig(moduleName); module != nil {
 		if module.Interval != "" {
-			fmt.Println(module)
 			sc.Spec.ScrapeInterval = ptr.To(monitoringv1.Duration(module.Interval))
 		}
 		if module.Timeout != "" {
-			fmt.Println(module)
 			sc.Spec.ScrapeTimeout = ptr.To(monitoringv1.Duration(module.Timeout))
 		}
 	}

@@ -5,22 +5,5 @@ metadata:
   namespace: {{ .Release.Namespace }}
 data:
   config.yaml: |
-    networks:
-    {{- range .Values.config.networks }}
-      - {{ . | quote }}
-    {{- end }}
-    interval: {{ .Values.config.interval | quote }}
+{{ .Values.config | toYaml | indent 4 }}
     namespace: {{ .Release.Namespace | quote }}
-    workers: {{ .Values.config.workers }}
-    {{- if .Values.config.modules }}
-    modules:
-    {{- range .Values.config.modules }}
-      - name: {{ .name | quote }}
-        {{- if .scrapeInterval }}
-        scrapeInterval: {{ .scrapeInterval | quote }}
-        {{- end }}
-        {{- if .scrapeTimeout }}
-        scrapeTimeout: {{ .scrapeTimeout | quote }}
-        {{- end }}
-    {{- end }}
-    {{- end }}

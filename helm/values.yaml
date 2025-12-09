@@ -13,11 +13,11 @@ config:
   # Optional per-module configuration:
   # modules:
   #   - name: "ipmi"
-  #     scrapeInterval: "5m"
-  #     scrapeTimeout: "30s"
+  #     interval: "5m"
+  #     timeout: "30s"
   #   - name: "node"
-  #     scrapeInterval: "1m"
-  #     scrapeTimeout: "10s"
+  #     interval: "1m"
+  #     timeout: "10s"
 
 serviceAccount:
   create: true
